@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77affa63-4ecf-44d3-a53e-cf8013ae9d33" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../2019_06_05/U1M1L2Katas/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../2019_06_05/U1M1L2Katas/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../02-How-many-times-to-7/howmanytimes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../02-How-many-times-to-7/howmanytimes/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../02-How-many-times-to-7/howmanytimes/howmanytimes.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/starter-code/U1M1L3Katas/U1M1L3Katas.iml" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/starter-code/U1M1L3Katas/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -138,6 +135,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />

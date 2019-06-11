@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da37d3ad-3e7f-4f01-b0a2-27e57bd66217" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../2019_06_06/02-How-many-times-to-7/howmanytimes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../2019_06_06/02-How-many-times-to-7/howmanytimes/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../2019_06_06/02-How-many-times-to-7/howmanytimes/howmanytimes.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../2019_06_06/katas/starter-code/U1M1L3Katas/U1M1L3Katas.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2019_06_06/katas/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../2019_06_06/katas/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
