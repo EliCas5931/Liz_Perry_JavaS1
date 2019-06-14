@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MonthConverterIf {
     public static void main(String[] args) {
         Scanner myScanner = new Scanner(System.in);
-        System.out.println("Please enter a number between 1 and 12.");
+        System.out.println("Please enter a number between 1 and 12 (inclusive).");
         String userInput = myScanner.next();
 
         int userMonth = Integer.parseInt(userInput);

@@ -1,13 +1,15 @@
 package com.company;
 
 public class SomeMath {
+
     public static void main(String[] args) {
 
-        totalFive(1, 2, 3, 4, 5);
+        System.out.println(totalFive(1, 2, 3, 4, 5));
 
-        averageFive(1,3,5,7,9);
+        System.out.println(averageFive(1,3,5,7,9));
 
-        largestFive(42.0, 35.1, 2.3, 40.2, 15.6);
+        System.out.println(largestFive(42.0, 35.1, 2.3, 40.2, 15.6));
+
     }
 
     public static int totalFive (int num1, int num2, int num3, int num4, int num5) {
@@ -16,16 +18,12 @@ public class SomeMath {
 
         sumFive = num1 + num2 + num3 + num4 + num5;
 
-        System.out.println(sumFive);
-
         return sumFive;
     }
 
     public static double averageFive (int num1, int num2, int num3, int num4, int num5) {
 
         double avgFive = (num1 + num2 + num3 + num4 + num5) / 5;
-
-        System.out.println(avgFive);
 
         return avgFive;
     }
@@ -47,8 +45,6 @@ public class SomeMath {
             }
 
         }
-
-        System.out.println(returnLarge);
 
         return returnLarge;
 
