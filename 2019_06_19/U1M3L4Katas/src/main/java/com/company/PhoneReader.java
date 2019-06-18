@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 
-public class PhPPhoneReader {
+public class PhoneReader {
 
     public static void main(String[] args) {
 
