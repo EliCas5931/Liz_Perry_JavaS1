@@ -15,12 +15,12 @@ public class Application {
 
             int petIndex = Pets.choosePet();
 
-            String chosenPet = Pets.retrievePet(petIndex);
+            String choosePet = Pets.retrievePet(petIndex);
 
-            Pets.writePetToFile(chosenPet);
+            Pets.writePetToFile(choosePet);
 
             System.out.println("New saved animals file:");
-            
+
             Pets.readPetsFromFile();
 
         } catch (NumberFormatException e) {
