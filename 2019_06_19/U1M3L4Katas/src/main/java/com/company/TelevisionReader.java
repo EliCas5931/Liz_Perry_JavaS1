@@ -22,12 +22,12 @@ public class TelevisionReader {
             tvList = mapper.readValue(new File("televisions.json"), new TypeReference<List<Television>>() {
             });
 
-            for (Television student : tvList) {
+            for (Television TVS : tvList) {
                 System.out.println("==============");
-                System.out.println(student.getBrand());
-                System.out.println(student.getModel());
-                System.out.println(student.getPrice());
-                System.out.println(student.getScreenSize());
+                System.out.println(TVS.getBrand());
+                System.out.println(TVS.getModel());
+                System.out.println(TVS.getPrice());
+                System.out.println(TVS.getScreenSize());
             }
 
         } catch (IOException e) {
