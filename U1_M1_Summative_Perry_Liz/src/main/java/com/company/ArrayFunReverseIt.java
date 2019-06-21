@@ -16,6 +16,8 @@ public class ArrayFunReverseIt {
 
         }
 
+        // for each loop
+
         for (int forward: originalArray) {
 
             System.out.println(forward);

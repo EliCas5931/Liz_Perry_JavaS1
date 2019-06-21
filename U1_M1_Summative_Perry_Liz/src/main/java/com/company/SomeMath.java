@@ -12,14 +12,20 @@ public class SomeMath {
 
     }
 
+    //return total of 5 int parameters
+
     public static int totalFive (int num1, int num2, int num3, int num4, int num5) {
 
         int sumFive;
+
+        //arithmetic  operator +
 
         sumFive = num1 + num2 + num3 + num4 + num5;
 
         return sumFive;
     }
+
+    //take the average of 5 int parameters
 
     public static double averageFive (int num1, int num2, int num3, int num4, int num5) {
 
@@ -29,6 +35,8 @@ public class SomeMath {
     }
 
 //    public static double largestFive (double [] numbers)
+
+    // method must take 5 double parameters and return largest
 
     public static double largestFive (double num1, double num2, double num3, double num4, double num5) {
 

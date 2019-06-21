@@ -3,6 +3,8 @@ package com.company;
 import java.util.Scanner;
 
 public class MonthConverterIf {
+
+    //Convert a number entered by the user into a month. Prompt user for number 1 - 12
     public static void main(String[] args) {
         Scanner myScanner = new Scanner(System.in);
         System.out.println("Please enter a number between 1 and 12 (inclusive).");
@@ -35,6 +37,7 @@ public class MonthConverterIf {
         } else if (userMonth == 12) {
             System.out.println("December");
         } else {
+            //error message if out of bounds 1 -12
             System.out.println("You have entered an invalid number. You must enter a number between 1 and 12. Goodbye.");
         }
     }

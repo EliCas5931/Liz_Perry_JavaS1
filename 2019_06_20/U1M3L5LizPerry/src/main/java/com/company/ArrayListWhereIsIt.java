@@ -31,8 +31,6 @@ public class ArrayListWhereIsIt {
 
         boolean isInArray = arrayList1.contains(userIntInput);
 
-
-
         if (isInArray) {
 
             System.out.println(userIntInput + " is in Slot " + arrayList1.indexOf(userIntInput));
