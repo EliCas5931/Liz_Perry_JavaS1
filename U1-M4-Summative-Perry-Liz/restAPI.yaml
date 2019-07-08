@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  title: REST API
+  description: A service that provides a quote-of-the-day, word-of-the-day, and a magic 8-ball service.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local Dev Server
+paths:
+  /quote:
+    get:
+      summary: Retrieves a quote and its author in the API
+      responses:
+        '200':
+          description: A quote retrieved for you.
+          content:
+            application/json:
+              schema:
+                type: string
+  /word:
+    get:
+      summary: Retrieves a word and its definition in the API
+      responses:
+        '200':
+          description: A word and its definition retrieved for you
+          content:
+            application/json:
+              schema:
+                type: string
+
+# IDK if this works or if it's the right way to do it
+#  /magic/{input}:
+#    post:
+#      summary: Returns the question user input in the API
+
+#      parameters:
+#        - name: input
+#          in: path
+#          required: true
+#          description: The question for the Magic 8 Ball to answer
+#          schema:
+#            type: string
+#      responses:
+#        '200':
+#          description: A string of the user's question
+#          content:
+#            application/json:
+#              schema:
+#                type: string
+
+#  This one works to get response but can't figure out to store question
+#  /magic:
+#    get:
+#      summary: Takes in user's question and returns a response
+#      requestBody:
+#        required: true
+#        content:
+#          application/json:
+#            schema:
+#              type: string
+#      responses:
+#        '201':
+#          description: Store users question and return a response
+#          content:
+#            application/json:
+#              schema:
+#                type: string
+#        '422':
+#          description: Incomplete question. Please try again.
+  /magic:
+    post:
+      summary: Takes in user's question and returns a response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Question'
+      responses:
+        '200':
+          description: Store users question and return a response
+          content:
+            application/json:
+              schema:
+                type: string
+        '422':
+          description: Incomplete question. Please try again.
+  components:
+    schemas:
+      Question:
+        properties:
+          question1:
+            type: string
