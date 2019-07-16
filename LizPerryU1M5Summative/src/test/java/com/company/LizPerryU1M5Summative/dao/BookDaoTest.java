@@ -224,6 +224,44 @@ public class BookDaoTest {
 
     }
 
+    @Test
+    public void getBookByAuthor() {
 
+        Author author = new Author();
+        author.setFirstName("Joanne");
+        author.setLastName("Rowling");
+        author.setStreet("4 Privet Drive, Under the Staircase");
+        author.setCity("Little Whinging");
+        author.setState("Surrey");
+        author.setPostalCode("V1M 2R1");
+        author.setPhone("1-800-HARRY-POTTER");
+        author.setEmail("jkrowling@gmail.com");
+
+        author = AuthorDao.addAuthor(author);
+
+        Publisher publisher = new Publisher();
+        publisher.setName("Bloomsbury Publishing");
+        publisher.setStreet("1 Main Street");
+        publisher.setCity("London");
+        publisher.setState("Camden");
+        publisher.setPostalCode("V1M C2R");
+        publisher.setPhone("1-800-BLOOMSBURY");
+        publisher.setEmail("bloomsbury@publishing.com");
+
+        publisher = PublisherDao.addPublisher(publisher);
+
+        Book book = new Book();
+        book.setIsbn("9788700631625");
+        book.setPublishDate(LocalDate.of(1997, 6, 26));
+        book.setAuthorId(author.getId());
+        book.setTitle("Harry Potter and the Sorcerer's Stone");
+        book.setPublisherId(publisher.getId());
+        book.setPrice(new BigDecimal("14.99"));
+
+        BookDao.addBook(book);
+
+        List<Book> bList = BookDao.getAllBooksByAuthor(author.getId());
+        assertEquals(1, bList.size());
+    }
 
 }
