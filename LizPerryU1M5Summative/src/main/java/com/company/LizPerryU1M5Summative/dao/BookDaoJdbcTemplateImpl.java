@@ -100,7 +100,8 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
                 book.getAuthorId(),
                 book.getTitle(),
                 book.getPublisherId(),
-                book.getPrice());
+                book.getPrice(),
+                book.getId());
     }
 
     @Override

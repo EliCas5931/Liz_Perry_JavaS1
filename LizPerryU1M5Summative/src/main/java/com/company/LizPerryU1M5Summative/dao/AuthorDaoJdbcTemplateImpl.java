@@ -94,7 +94,8 @@ public class AuthorDaoJdbcTemplateImpl implements AuthorDao{
                 author.getState(),
                 author.getPostalCode(),
                 author.getPhone(),
-                author.getEmail());
+                author.getEmail(),
+                author.getId());
     }
 
     @Override

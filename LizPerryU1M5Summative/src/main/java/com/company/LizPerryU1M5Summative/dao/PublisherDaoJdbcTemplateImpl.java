@@ -87,7 +87,8 @@ public class PublisherDaoJdbcTemplateImpl implements PublisherDao {
                 publisher.getState(),
                 publisher.getPostalCode(),
                 publisher.getPhone(),
-                publisher.getEmail());
+                publisher.getEmail(),
+                publisher.getId());
 
     }
 
