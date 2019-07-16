@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -96,7 +97,7 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
         jdbcTemplate.update(
                 UPDATE_BOOK_SQL,
                 book.getIsbn(),
-//                Date.valueOf(book.getPublishDate());
+                book.getPublishDate(),
                 book.getAuthorId(),
                 book.getTitle(),
                 book.getPublisherId(),
