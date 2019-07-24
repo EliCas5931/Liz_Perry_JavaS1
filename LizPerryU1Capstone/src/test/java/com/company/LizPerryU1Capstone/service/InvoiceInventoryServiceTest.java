@@ -2,8 +2,7 @@ package com.company.LizPerryU1Capstone.service;
 
 import com.company.LizPerryU1Capstone.dao.*;
 import com.company.LizPerryU1Capstone.model.*;
-import com.company.LizPerryU1Capstone.viewmodel.ConsoleViewModel;
-import com.company.LizPerryU1Capstone.viewmodel.PurchaseViewModel;
+import com.company.LizPerryU1Capstone.viewmodel.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -141,7 +140,7 @@ public class InvoiceInventoryServiceTest {
         invoice.setState("SC");
         invoice.setZipCode("28056");
         invoice.setItemType("console");
-        invoice.setItemId(10);
+        invoice.setItemId(2);
         invoice.setUnitPrice(new BigDecimal("299.99"));
         invoice.setQuantity(2);
         invoice.setSubTotal(new BigDecimal("599.98"));
@@ -156,7 +155,7 @@ public class InvoiceInventoryServiceTest {
         invoice.setState("SC");
         invoice.setZipCode("28050");
         invoice.setItemType("t_shirt");
-        invoice.setItemId(10);
+        invoice.setItemId(2);
         invoice.setUnitPrice(new BigDecimal("29.99"));
         invoice.setQuantity(2);
         invoice.setSubTotal(new BigDecimal("59.98"));
@@ -208,27 +207,284 @@ public class InvoiceInventoryServiceTest {
 
     }
 
+
+    // Console methods
+
     @Test
-    public void saveFindConsole() {
+    public void saveConsole() {
+        ConsoleViewModel consoleViewModel = new ConsoleViewModel();
+        consoleViewModel.setId(2);
+        consoleViewModel.setModel("PlayStation 4");
+        consoleViewModel.setManufacturer("Sony");
+        consoleViewModel.setMemoryAmount("500 GB");
+        consoleViewModel.setProcessor("AMD Jaguar");
+        consoleViewModel.setPrice(new BigDecimal("299.9").setScale(2));
+        consoleViewModel.setQuantity(20);
 
-        ConsoleViewModel console = new ConsoleViewModel();
-        console.setModel("PlayStation 4");
-        console.setManufacturer("Sony");
-        console.setMemoryAmount("500 GB");
-        console.setProcessor("AMD Jaguar");
-        console.setPrice(new BigDecimal("299.9").setScale(2));
-        console.setQuantity(20);
+        consoleViewModel = invoiceInventoryService.saveConsole(consoleViewModel);
 
-        invoiceInventoryService.saveConsole(console);
+        ConsoleViewModel fromService = invoiceInventoryService.findConsole(consoleViewModel.getId());
 
-        ConsoleViewModel fromService = invoiceInventoryService.findConsole(console.getId());
-
-        assertEquals(console, fromService);
+        assertEquals(consoleViewModel, fromService);
     }
 
     @Test
-    public void setProcessingFeeDao() {
+    public void findAllConsoles() {
+        ConsoleViewModel consoleViewModel = new ConsoleViewModel();
+        consoleViewModel.setId(2);
+        consoleViewModel.setModel("PlayStation 4");
+        consoleViewModel.setManufacturer("Sony");
+        consoleViewModel.setMemoryAmount("500 GB");
+        consoleViewModel.setProcessor("AMD Jaguar");
+        consoleViewModel.setPrice(new BigDecimal("299.9").setScale(2));
+        consoleViewModel.setQuantity(20);
 
+        consoleViewModel = invoiceInventoryService.saveConsole(consoleViewModel);
+
+        ConsoleViewModel fromService = invoiceInventoryService.findConsole(consoleViewModel.getId());
+
+        assertEquals(consoleViewModel, fromService);
+
+        List<ConsoleViewModel> cList = invoiceInventoryService.findAllConsoles();
+
+        assertEquals(1, cList.size());
+    }
+
+    @Test
+    public void findConsoleByManufacturer() {
+
+        ConsoleViewModel consoleViewModel = new ConsoleViewModel();
+        consoleViewModel.setId(2);
+        consoleViewModel.setModel("PlayStation 4");
+        consoleViewModel.setManufacturer("Sony");
+        consoleViewModel.setMemoryAmount("500 GB");
+        consoleViewModel.setProcessor("AMD Jaguar");
+        consoleViewModel.setPrice(new BigDecimal("299.9").setScale(2));
+        consoleViewModel.setQuantity(20);
+
+        consoleViewModel = invoiceInventoryService.saveConsole(consoleViewModel);
+
+        List<ConsoleViewModel> fromService = invoiceInventoryService.findConsoleByManufacturer("Sony");
+
+        assertEquals(1, fromService.size());
+
+        assertEquals(consoleViewModel, fromService.get(0));
+    }
+
+    // Game methods
+
+    @Test
+    public void saveGame() {
+        GameViewModel gameViewModel = new GameViewModel();
+        gameViewModel.setId(45);
+        gameViewModel.setTitle("Overwatch");
+        gameViewModel.setEsrbRating("T");
+        gameViewModel.setDescription("Online multiplayer 6 v 6.");
+        gameViewModel.setPrice(new BigDecimal("29.99").setScale(2));
+        gameViewModel.setStudio("Blizzard");
+        gameViewModel.setQuantity(30);
+
+        gameViewModel = invoiceInventoryService.saveGame(gameViewModel);
+
+        GameViewModel fromService = invoiceInventoryService.findGame(gameViewModel.getId());
+
+        assertEquals(gameViewModel, fromService);
+    }
+
+    @Test
+    public void findGame() {
+        GameViewModel gameViewModel = new GameViewModel();
+
+        gameViewModel.setTitle("Overwatch");
+        gameViewModel.setEsrbRating("T");
+        gameViewModel.setDescription("Online multiplayer 6 v 6.");
+        gameViewModel.setPrice(new BigDecimal("29.99").setScale(2));
+        gameViewModel.setStudio("Blizzard");
+        gameViewModel.setQuantity(30);
+
+        gameViewModel = invoiceInventoryService.saveGame(gameViewModel);
+
+        GameViewModel fromService = invoiceInventoryService.findGame(gameViewModel.getId());
+
+        assertEquals(gameViewModel, fromService);
+    }
+
+    @Test
+    public void findAllGames() {
+        GameViewModel gameViewModel = new GameViewModel();
+
+        gameViewModel.setTitle("Overwatch");
+        gameViewModel.setEsrbRating("T");
+        gameViewModel.setDescription("Online multiplayer 6 v 6.");
+        gameViewModel.setPrice(new BigDecimal("29.99").setScale(2));
+        gameViewModel.setStudio("Blizzard");
+        gameViewModel.setQuantity(30);
+
+        gameViewModel = invoiceInventoryService.saveGame(gameViewModel);
+
+        GameViewModel fromService = invoiceInventoryService.findGame(gameViewModel.getId());
+
+        assertEquals(gameViewModel, fromService);
+
+        List<GameViewModel> gameViewModelList = invoiceInventoryService.findAllGames();
+
+        assertEquals(1, gameViewModelList.size());
+
+        assertEquals(gameViewModel, gameViewModelList.get(0));
+    }
+
+    @Test
+    public void findGamesByStudio() {
+        GameViewModel gameViewModel = new GameViewModel();
+
+        gameViewModel.setTitle("Overwatch");
+        gameViewModel.setEsrbRating("T");
+        gameViewModel.setDescription("Online multiplayer 6 v 6.");
+        gameViewModel.setPrice(new BigDecimal("29.99").setScale(2));
+        gameViewModel.setStudio("Blizzard");
+        gameViewModel.setQuantity(30);
+
+        gameViewModel = invoiceInventoryService.saveGame(gameViewModel);
+
+        List<GameViewModel> fromService = invoiceInventoryService.findGameByStudio("Blizzard");
+
+        assertEquals(1, fromService.size());
+
+        assertEquals(gameViewModel, fromService.get(0));
+    }
+
+    @Test
+    public void findGamesByESRBRating() {
+        GameViewModel gameViewModel = new GameViewModel();
+
+        gameViewModel.setTitle("Overwatch");
+        gameViewModel.setEsrbRating("T");
+        gameViewModel.setDescription("Online multiplayer 6 v 6.");
+        gameViewModel.setPrice(new BigDecimal("29.99").setScale(2));
+        gameViewModel.setStudio("Blizzard");
+        gameViewModel.setQuantity(30);
+
+        gameViewModel = invoiceInventoryService.saveGame(gameViewModel);
+
+        List<GameViewModel> fromService = invoiceInventoryService.findGamesByESRBRating("T");
+
+        assertEquals(1, fromService.size());
+
+        assertEquals(gameViewModel, fromService.get(0));
+    }
+
+    @Test
+    public void findGamesByTitle() {
+        GameViewModel gameViewModel = new GameViewModel();
+
+        gameViewModel.setTitle("Overwatch");
+        gameViewModel.setEsrbRating("T");
+        gameViewModel.setDescription("Online multiplayer 6 v 6.");
+        gameViewModel.setPrice(new BigDecimal("29.99").setScale(2));
+        gameViewModel.setStudio("Blizzard");
+        gameViewModel.setQuantity(30);
+
+        gameViewModel = invoiceInventoryService.saveGame(gameViewModel);
+
+        List<GameViewModel> fromService = invoiceInventoryService.findGamesByTitle("Overwatch");
+
+        assertEquals(1, fromService.size());
+
+        assertEquals(gameViewModel, fromService.get(0));
+    }
+
+    // TShirt methods
+
+    @Test
+    public void saveTShirt() {
+        TShirtViewModel tShirtViewModel = new TShirtViewModel();
+
+        tShirtViewModel.setSize("Medium");
+        tShirtViewModel.setColor("Black");
+        tShirtViewModel.setDescription("Overwatch Characters");
+        tShirtViewModel.setPrice(new BigDecimal("14.99").setScale(2));
+        tShirtViewModel.setQuantity(40);
+
+        tShirtViewModel = invoiceInventoryService.saveTShirt(tShirtViewModel);
+
+        TShirtViewModel fromService = invoiceInventoryService.findTShirt(tShirtViewModel.getId());
+
+        assertEquals(tShirtViewModel, fromService);
+    }
+
+    @Test
+    public void findTShirt() {
+        TShirtViewModel tShirtViewModel = new TShirtViewModel();
+
+        tShirtViewModel.setSize("Medium");
+        tShirtViewModel.setColor("Black");
+        tShirtViewModel.setDescription("Overwatch Characters");
+        tShirtViewModel.setPrice(new BigDecimal("14.99").setScale(2));
+        tShirtViewModel.setQuantity(40);
+
+        tShirtViewModel = invoiceInventoryService.saveTShirt(tShirtViewModel);
+
+        TShirtViewModel fromService = invoiceInventoryService.findTShirt(tShirtViewModel.getId());
+
+        assertEquals(tShirtViewModel, fromService);
+    }
+
+    @Test
+    public void findAllTShirts() {
+        TShirtViewModel tShirtViewModel = new TShirtViewModel();
+        tShirtViewModel.setSize("Medium");
+        tShirtViewModel.setColor("Black");
+        tShirtViewModel.setDescription("Overwatch Characters");
+        tShirtViewModel.setPrice(new BigDecimal("14.99").setScale(2));
+        tShirtViewModel.setQuantity(40);
+
+        tShirtViewModel = invoiceInventoryService.saveTShirt(tShirtViewModel);
+
+        TShirtViewModel fromService = invoiceInventoryService.findTShirt(tShirtViewModel.getId());
+
+        assertEquals(tShirtViewModel, fromService);
+
+        List<TShirtViewModel> tShirtViewModels = invoiceInventoryService.findAllTShirts();
+
+        assertEquals(1, tShirtViewModels.size());
+
+        assertEquals(tShirtViewModel, tShirtViewModels.get(0));
+    }
+
+    @Test
+    public void findTShirtByColor() {
+        TShirtViewModel tShirtViewModel = new TShirtViewModel();
+        tShirtViewModel.setSize("Medium");
+        tShirtViewModel.setColor("Black");
+        tShirtViewModel.setDescription("Overwatch Characters");
+        tShirtViewModel.setPrice(new BigDecimal("14.99").setScale(2));
+        tShirtViewModel.setQuantity(40);
+
+        tShirtViewModel = invoiceInventoryService.saveTShirt(tShirtViewModel);
+
+        List<TShirtViewModel> fromService = invoiceInventoryService.findTShirtByColor("Black");
+
+        assertEquals(1, fromService.size());
+
+        assertEquals(tShirtViewModel, fromService.get(0));
+    }
+
+    @Test
+    public void findTShirtBySize() {
+        TShirtViewModel tShirtViewModel = new TShirtViewModel();
+        tShirtViewModel.setSize("Medium");
+        tShirtViewModel.setColor("Black");
+        tShirtViewModel.setDescription("Overwatch Characters");
+        tShirtViewModel.setPrice(new BigDecimal("14.99").setScale(2));
+        tShirtViewModel.setQuantity(40);
+
+        tShirtViewModel = invoiceInventoryService.saveTShirt(tShirtViewModel);
+
+        List<TShirtViewModel> fromService = invoiceInventoryService.findTShirtBySize("Medium");
+
+        assertEquals(1, fromService.size());
+
+        assertEquals(tShirtViewModel, fromService.get(0));
     }
 
     @Test
@@ -246,7 +502,7 @@ public class InvoiceInventoryServiceTest {
         purchaseViewModel.setQuantity(3);
 
         String er = invoiceInventoryService.validatePurchase(purchaseViewModel);
-        assertEquals("Not enough in stock! Please try again!", er);
+        assertEquals("This 1 does not exist. Not enough in stock! Please try again!", er);
 
         purchaseViewModel.setState("CS");
         er = invoiceInventoryService.validateStateCode(purchaseViewModel.getState());
@@ -297,7 +553,7 @@ public class InvoiceInventoryServiceTest {
         invoice.setState("SC");
         invoice.setZipCode("28056");
         invoice.setItemType("console");
-        invoice.setItemId(10);
+        invoice.setItemId(2);
         invoice.setUnitPrice(new BigDecimal("299.99"));
         invoice.setQuantity(2);
         invoice.setSubTotal(new BigDecimal("599.98"));
@@ -351,17 +607,5 @@ public class InvoiceInventoryServiceTest {
         assertEquals(new BigDecimal("650.97"), total);
 
     }
-
-    @Test
-    public void validateTotal() {
-
-
-    }
-
-
-
-
-
-
 
 }

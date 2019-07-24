@@ -77,7 +77,7 @@ public class GameInventoryController {
         return games;
     }
 
-    @GetMapping("/title/{title")
+    @GetMapping("/title/{title}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByTitle(@PathVariable("title") String title) {
         List<GameViewModel> games = inventoryService.findGamesByTitle(title);

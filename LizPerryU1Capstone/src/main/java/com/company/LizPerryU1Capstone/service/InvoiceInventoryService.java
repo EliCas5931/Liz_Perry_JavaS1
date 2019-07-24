@@ -620,7 +620,7 @@ public class InvoiceInventoryService {
 
                 if (console == null) {
 
-                    itemError = "This " + itemId + " does not exist.";
+                    itemError = "This " + itemId + " does not exist. ";
 
                 } else
 
@@ -632,7 +632,7 @@ public class InvoiceInventoryService {
 
                 if (tShirt == null) {
 
-                    itemError = "This " + itemId + " does not exist.";
+                    itemError = "This " + itemId + " does not exist. ";
 
                 } else
 
@@ -644,7 +644,7 @@ public class InvoiceInventoryService {
 
                 if (game == null) {
 
-                    itemError = "This " + itemId + " does not exist.";
+                    itemError = "This " + itemId + " does not exist. ";
 
                 } else
 
