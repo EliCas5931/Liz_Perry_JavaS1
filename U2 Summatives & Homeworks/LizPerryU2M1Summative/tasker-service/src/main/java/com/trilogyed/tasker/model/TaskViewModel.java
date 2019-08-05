@@ -1,5 +1,6 @@
 package com.trilogyed.tasker.model;
 
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,7 +10,9 @@ public class TaskViewModel {
     private int id;
     @NotEmpty(message = "Please input a description!")
     private String description;
+    @FutureOrPresent(message = "Please input a valid date!")
     private LocalDate createDate;
+    @FutureOrPresent(message = "Please input a valid date!")
     private LocalDate dueDate;
     @NotEmpty(message = "Please input a category!")
     private String category;
@@ -82,15 +85,15 @@ public class TaskViewModel {
     }
 
     // Double check if this is needed
-    @Override
-    public String toString() {
-        return "TaskViewModel{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", createDate=" + createDate +
-                ", dueDate=" + dueDate +
-                ", category='" + category + '\'' +
-                ", advertisement='" + advertisement + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "TaskViewModel{" +
+//                "id=" + id +
+//                ", description='" + description + '\'' +
+//                ", createDate=" + createDate +
+//                ", dueDate=" + dueDate +
+//                ", category='" + category + '\'' +
+//                ", advertisement='" + advertisement + '\'' +
+//                '}';
+//    }
 }

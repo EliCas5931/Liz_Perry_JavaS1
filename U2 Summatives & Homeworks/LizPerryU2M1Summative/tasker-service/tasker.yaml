@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: Tasker service Project
+  description:
+    A service that allows CRUD operations for a Tasker service Project.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:2121'
+    description: Local dev server
+paths:
+  /tasks:
+    post:
+      summary: Creates a new task entry with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: A task object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Bad request. Invalid request syntax.
+    put:
+      summary: Updated the entry for the task with the given ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: Task successfully updated.
+        '400':
+          description: Bad request. Invalid request syntax.
+    get:
+      summary: Retrieves all the Tasks.
+      responses:
+        '200':
+          description: a list of Tasks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /tasks/{id}:
+    get:
+      summary: Retrieves the entry for the task with the give ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the task you would like to retrieve.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: Task object matching given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    delete:
+      summary: Deletes the entry for the task with the given ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the task you would like to delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: Task successfully deleted.
+  /tasks/category/{category}:
+    get:
+      summary: Retrieves the entry for the task with the given category.
+      parameters:
+        - name: category
+          in: path
+          required: true
+          description: category of the task you would like to retrieve.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: Task object matching given category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+components:
+  schemas:
+    Task:
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+        createDate:
+          type: string
+        dueDate:
+          type: string
+        category:
+          type: string
+      required:
+        - title
+        - description
+        - createDate
+        - dueDate
+        - category

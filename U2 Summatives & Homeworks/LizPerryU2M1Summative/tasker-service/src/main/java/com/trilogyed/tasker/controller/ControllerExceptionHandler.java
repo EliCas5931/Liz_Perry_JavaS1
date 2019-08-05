@@ -1,6 +1,7 @@
 package com.trilogyed.tasker.controller;
 
-import org.springframework.dao.DataAccessException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.trilogyed.tasker.exception.NotFoundException;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,66 +17,69 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RestControllerAdvice
 @RequestMapping(produces = "application/vnd.error+json")
 public class ControllerExceptionHandler {
-
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<VndErrors> validationError(MethodArgumentNotValidException e, WebRequest request) {
-
-        // BindingResult holds the validation errors
         BindingResult result = e.getBindingResult();
-        // Validation errors are stored in FieldError objects
+
         List<FieldError> fieldErrors = result.getFieldErrors();
 
-        // Translate the FieldErrors to VndErrors
         List<VndErrors.VndError> vndErrorList = new ArrayList<>();
 
         for (FieldError fieldError : fieldErrors) {
+
             VndErrors.VndError vndError = new VndErrors.VndError(request.toString(), fieldError.getDefaultMessage());
+
             vndErrorList.add(vndError);
         }
 
-        // Wrap all of the VndError objects in a VndErrors object
         VndErrors vndErrors = new VndErrors(vndErrorList);
 
-        // Create and return the ResponseEntity
-        ResponseEntity<VndErrors> responseEntity = new ResponseEntity<>(vndErrors, HttpStatus.UNPROCESSABLE_ENTITY);
-        return responseEntity;
+        ResponseEntity<VndErrors> responseEntity = new ResponseEntity<>(vndErrors, HttpStatus.BAD_REQUEST);
 
+        return responseEntity;
+    }
+    @ExceptionHandler(value = {NotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<VndErrors> notFoundException(NotFoundException e, WebRequest request) {
+        VndErrors error = new VndErrors(request.toString(), "Not found : " + e.getMessage());
+
+        ResponseEntity<VndErrors> responseEntity = new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+
+        return responseEntity;
     }
 
-    @ExceptionHandler(value = {IllegalArgumentException.class})
+    @ExceptionHandler(value = {InvalidFormatException.class})
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<VndErrors> outOfRangeException(IllegalArgumentException e, WebRequest request) {
-        VndErrors error = new VndErrors(request.toString(), e.getMessage());
+    public ResponseEntity<VndErrors>numberFormat(InvalidFormatException e, WebRequest request){
+        VndErrors error = new VndErrors(request.toString(), "Invalid Format input "+e.getMessage());
+
         ResponseEntity<VndErrors> responseEntity = new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+
         return responseEntity;
     }
 
     @ExceptionHandler(value = {NumberFormatException.class})
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public ResponseEntity<VndErrors> numberFormatException(NumberFormatException e, WebRequest request) {
-        VndErrors error = new VndErrors(request.toString(), "Parameter must be a whole number. " + e.getMessage());
+        VndErrors error = new VndErrors(request.toString(), "Parameter must be a number. " + e.getMessage());
+
         ResponseEntity<VndErrors> responseEntity = new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+
         return responseEntity;
     }
 
-    @ExceptionHandler(value = {DataAccessException.class})
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<VndErrors> dataAccessException(DataAccessException e, WebRequest request) {
-        VndErrors error = new VndErrors(request.toString(), "An internal error occured" + e.getMessage());
-        ResponseEntity<VndErrors> responseEntity = new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<VndErrors> outOfRangeException(IllegalArgumentException e, WebRequest request) {
+        VndErrors error = new VndErrors(request.toString(), "BAD_REQUEST, FIX IT PLEASE" + e.getMessage());
+
+        ResponseEntity<VndErrors> responseEntity = new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
         return responseEntity;
     }
-
-//    @ExceptionHandler(value = {NotFoundException.class})
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    public ResponseEntity<VndErrors> notFoundException(NotFoundException e, WebRequest request) {
-//        VndErrors error = new VndErrors(request.toString(), "Not found : " + e.getMessage());
-//        ResponseEntity<VndErrors> responseEntity = new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-//        return responseEntity;
-//    }
 }
-//}
