@@ -1,0 +1,217 @@
+openapi: 3.0.0
+info:
+  title: Book Store Project
+  description:
+    api for Book Store
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:9100'
+    description: Local dev server
+paths:
+  /books:
+    post:
+      summary: create book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: A Book object created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete book information. Some required fields missing.
+    get:
+      summary: Gets all the books
+      responses:
+        '200':
+          description: All the books
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+  /books/{id}:
+    get:
+      summary: Retrieves the entry of a book with the give ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the book you would like to retrieve.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Book object matching given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+    delete:
+      summary: Deletes the entry of the book with the given ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the book you would like to delete.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Book successfully deleted.
+    put:
+      summary: Updated the entry for the book with the given ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the book you would like to update.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: Book successfully updated.
+        '422':
+          description: Book ID on path mush match the ID in the Game object
+  /notes:
+    post:
+      summary: create note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '201':
+          description: A Note object created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete note information. Some required fields missing.
+    get:
+      summary: Get all the notes
+      responses:
+        '200':
+          description: All the Notes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+  /notes/{id}:
+    get:
+      summary: Gets the note by the given title
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the note to retrieve
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Note object matching given id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+    delete:
+      summary: Deletes the entry for the Note with the given ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the note you would like to delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: note successfully deleted.
+    put:
+      summary: Update the entry for the note with the given ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the note you would like to update.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '200':
+          description: Note successfully updated.
+        '422':
+          description: Note ID on path mush match a ID in the database.
+  /notes/book/{book_id}:
+    get:
+      summary: Gets the books with the given Id
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          description: book id of the notes you would like to retrieve
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: notes matching given book id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+components:
+  schemas:
+    Book:
+      properties:
+        book_id:
+          type: integer
+        title:
+          type: string
+        author:
+          type: string
+      required:
+        - book_id
+        - title
+        - author
+    Note:
+      properties:
+        note_id:
+          type: integer
+        book_id:
+          type: integer
+        note:
+          type: string
+      required:
+        - note_id
+        - book_id
+        - note
