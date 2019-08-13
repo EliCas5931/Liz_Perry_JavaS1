@@ -18,12 +18,12 @@ public class PostViewModel {
     public PostViewModel() {
     }
 
-//    public PostViewModel(@NotNull(message = "Post date cannot be null") LocalDate postDate, @NotNull(message = "Poster name cannot be null") String posterName, String post, List<Comment> commentList) {
-//        this.postDate = postDate;
-//        this.posterName = posterName;
-//        this.post = post;
-//        this.commentList = commentList;
-//    }
+    public PostViewModel(@NotNull(message = "Post date cannot be null") LocalDate postDate, @NotNull(message = "Poster name cannot be null") String posterName, String post, List<Comment> commentList) {
+        this.postDate = postDate;
+        this.posterName = posterName;
+        this.post = post;
+        this.commentList = commentList;
+    }
 
     public PostViewModel(int postID, @NotNull(message = "Post date cannot be null") LocalDate postDate, @NotNull(message = "Poster name cannot be null") String posterName, String post, List<Comment> commentList) {
         this.id = postID;

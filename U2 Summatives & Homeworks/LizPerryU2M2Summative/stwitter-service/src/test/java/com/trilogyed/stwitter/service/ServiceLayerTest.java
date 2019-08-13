@@ -8,10 +8,12 @@ import com.trilogyed.stwitter.model.PostViewModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,18 +28,17 @@ import static org.mockito.Mockito.mock;
 public class ServiceLayerTest {
 
     ServiceLayer serviceLayer;
-    @Mock
     RabbitTemplate rabbitTemplate;
-    @Mock
     PostClient postClient;
-    @Mock
     CommentClient commentClient;
 
     @Before
     public void setUp() throws Exception{
+
         MockitoAnnotations.initMocks(this);
         createCommentService();
         createPostService();
+        createRabbit();
         serviceLayer = new ServiceLayer(rabbitTemplate, commentClient, postClient);
 
     }
@@ -63,6 +64,10 @@ public class ServiceLayerTest {
         doReturn(commentList).when(commentClient).getCommentsByPostId(1);
     }
 
+    public void createRabbit(){
+        rabbitTemplate = mock(RabbitTemplate.class);
+    }
+
     public void createPostService(){
         postClient = mock(PostClient.class);
 
@@ -73,9 +78,9 @@ public class ServiceLayerTest {
         post.setPost("My very first post as Liz Perry!");
 
         Post post1 = new Post();
-        post1.setPostDate(LocalDate.of(2019,8,11));
-        post1.setPosterName("Kaleigh Harold");
-        post1.setPost("My very first post as Kaleigh Harold!");
+        post1.setPostDate(LocalDate.of(2019,8,12));
+        post1.setPosterName("Liz Perry");
+        post1.setPost("My very first post as Liz Perry!");
 
         List<Post> postList = new ArrayList<>();
         postList.add(post);
@@ -115,9 +120,9 @@ public class ServiceLayerTest {
     @Test
     public void getPostById(){
         PostViewModel postViewModel = serviceLayer.getPostById(1);
-        postViewModel.setPostDate(LocalDate.of(2019,7,17));
-        postViewModel.setPosterName("David");
-        postViewModel.setPost("This is post 1");
+        postViewModel.setPostDate(LocalDate.of(2019,8,12));
+        postViewModel.setPosterName("Liz Perry");
+        postViewModel.setPost("My very first post as Liz Perry!");
         postViewModel.setCommentList(commentClient.getCommentsByPostId(1));
 
         postViewModel = serviceLayer.createPostWithComments(postViewModel);
@@ -131,9 +136,9 @@ public class ServiceLayerTest {
     public void getPostByPosterName(){
         PostViewModel postViewModel = new PostViewModel();
         postViewModel.setId(1);
-        postViewModel.setPostDate(LocalDate.of(2019,7,17));
-        postViewModel.setPosterName("David");
-        postViewModel.setPost("This is post 1");
+        postViewModel.setPostDate(LocalDate.of(2019,8,12));
+        postViewModel.setPosterName("Liz Perry");
+        postViewModel.setPost("My very first post as Liz Perry!");
         postViewModel.setCommentList(commentClient.getCommentsByPostId(1));
 
         postViewModel = serviceLayer.createPostWithComments(postViewModel);
