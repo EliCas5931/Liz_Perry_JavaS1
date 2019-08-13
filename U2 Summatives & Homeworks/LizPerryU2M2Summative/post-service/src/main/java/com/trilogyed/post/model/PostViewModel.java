@@ -1,39 +1,38 @@
-package com.trilogyed.stwitter.viewmodel;
+package com.trilogyed.post.model;
 
-import com.trilogyed.stwitter.model.Comment;
-
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class PostViewModel {
 
-    private int id;
+
+    private int postID;
+    @NotNull(message = "Date cannot be null")
     private LocalDate postDate;
+    @NotNull(message = "Poster name cannot be null")
     private String posterName;
     private String post;
-
     private List<Comment> commentList;
 
     public PostViewModel() {
-
     }
 
-    public PostViewModel(int id, LocalDate postDate, String posterName, String post, List<Comment> commentList) {
-        this.id = id;
+    public PostViewModel(int postID, @NotNull(message = "Date cannot be null") LocalDate postDate, @NotNull(message = "Poster name cannot be null") String posterName, String post, List<Comment> commentList) {
+        this.postID = postID;
         this.postDate = postDate;
         this.posterName = posterName;
         this.post = post;
         this.commentList = commentList;
     }
 
-    public int getId() {
-        return id;
+    public int getPostID() {
+        return postID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPostID(int postID) {
+        this.postID = postID;
     }
 
     public LocalDate getPostDate() {
@@ -73,22 +72,22 @@ public class PostViewModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PostViewModel that = (PostViewModel) o;
-        return id == that.id &&
-                Objects.equals(postDate, that.postDate) &&
-                Objects.equals(posterName, that.posterName) &&
+        return postID == that.postID &&
+                postDate.equals(that.postDate) &&
+                posterName.equals(that.posterName) &&
                 Objects.equals(post, that.post) &&
                 Objects.equals(commentList, that.commentList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, postDate, posterName, post, commentList);
+        return Objects.hash(postID, postDate, posterName, post, commentList);
     }
 
     @Override
     public String toString() {
         return "PostViewModel{" +
-                "id=" + id +
+                "postID=" + postID +
                 ", postDate=" + postDate +
                 ", posterName='" + posterName + '\'' +
                 ", post='" + post + '\'' +

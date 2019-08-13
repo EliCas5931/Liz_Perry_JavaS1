@@ -19,7 +19,6 @@ public class Comment {
     private String comment;
 
     public Comment() {
-
     }
 
     public Comment(int commentId, int postId, LocalDate createDate, String commenterName, String comment) {
@@ -77,8 +76,8 @@ public class Comment {
         Comment comment1 = (Comment) o;
         return commentId == comment1.commentId &&
                 postId == comment1.postId &&
-                Objects.equals(createDate, comment1.createDate) &&
-                Objects.equals(commenterName, comment1.commenterName) &&
+                createDate.equals(comment1.createDate) &&
+                commenterName.equals(comment1.commenterName) &&
                 Objects.equals(comment, comment1.comment);
     }
 

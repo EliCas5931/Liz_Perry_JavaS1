@@ -1,17 +1,20 @@
 package com.trilogyed.stwitter.model;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Post {
 
+
     private int postID;
+    @NotNull(message = "Post date cannot be null")
     private LocalDate postDate;
+    @NotNull(message = "Poster name cannot be null")
     private String posterName;
     private String post;
 
     public Post() {
-
     }
 
     public Post(int postID, LocalDate postDate, String posterName, String post) {
@@ -59,8 +62,8 @@ public class Post {
         if (o == null || getClass() != o.getClass()) return false;
         Post post1 = (Post) o;
         return postID == post1.postID &&
-                Objects.equals(postDate, post1.postDate) &&
-                Objects.equals(posterName, post1.posterName) &&
+                postDate.equals(post1.postDate) &&
+                posterName.equals(post1.posterName) &&
                 Objects.equals(post, post1.post);
     }
 
